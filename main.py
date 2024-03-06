@@ -6,23 +6,24 @@ import win32com.client
 import subprocess
 from datetime import datetime
 import os
+import win32com.client as win32
 
 from openpyxl.workbook import Workbook
 from pynput.keyboard import Controller
 import datetime as dt
 
-## Setting variables to check is this version matches with the GSS Automation Team's control
-application = "Month-End Close De Beers"
-version = "v01"
-user_name = os.getlogin()
-path = f"C:/Users/{user_name}/Box/Automation Script Versions/versions.xlsx"
-df = pd.read_excel(path)
-filter_criteria = (df['app'] == application) & (df['versão'] == version)
-start_time = None
-
-if not filter_criteria.any():
-    print('Outdated app, talk to the automation team. Press ENTER to close the code \n')
-    quit()
+# ## Setting variables to check is this version matches with the GSS Automation Team's control
+# application = "Month-End Close De Beers"
+# version = "v01"
+# user_name = os.getlogin()
+# path = f"C:/Users/{user_name}/Box/Automation Script Versions/versions.xlsx"
+# df = pd.read_excel(path)
+# filter_criteria = (df['app'] == application) & (df['versão'] == version)
+# start_time = None
+#
+# if not filter_criteria.any():
+#     print('Outdated app, talk to the automation team. Press ENTER to close the code \n')
+#     quit()
 
 userInput = input("Please press ENTER and select the file with valid company codes:\n")
 file_name = askopenfilename()
@@ -56,7 +57,7 @@ application = SapGuiAuto.GetScriptingEngine
 # Ask the user for the server name
 server_name = input("Please enter your SAP server name: \n")
 
-if server_name == "QP8":
+if server_name == "AOP FI QP8":
     # Open connection
     connection = application.OpenConnection(str(server_name), True) # "QP8"
 
@@ -93,7 +94,7 @@ elif server_name == "PS8 [Anglo AOP]":
     session.findById("wnd[1]/tbar[0]/btn[5]").press()
 
 else:
-    print("Invalid server name. Please enter either QP8 or PS8")
+    print("Invalid server name. Please enter either the server name for QP8 or PS8")
 
 def run_first_loop(codes, new_month):
     df_sap = pd.DataFrame(columns=["Var.",	"A",	"From Account",	"To Account",	"From Per. 1",	"Year",	"To Per. 1",	"Year2",	"Authorization Group",	"From Per.2",	"Year3",	"To Per. 2",	"Year4", "Status", "Date_Time"])
@@ -391,6 +392,27 @@ def save_execution_log(log_file_path, message):
 # Once the period has been updated, save.
 save_execution_log(log_file_path, "Period updated successfully.")
 # Once the period has been updated, save.
-# session.findById("wnd[0]/tbar[0]/btn[11]").press()
+session.findById("wnd[0]/tbar[0]/btn[11]").press()
+
+# Create an Outlook application object and Create a new email
+outlook = win32.Dispatch('Outlook.Application')
+email = outlook.CreateItem(0)
+email.Subject = 'Automation Team - Execution Log File'
+email_body = f"""
+<html>
+<body>
+<p> Dear Automation Team,</p>
+<p> 'Please find attached the execution log file for the Month-End Close De Beers automation executed on {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}' </p>
+<p> Best regards, <br></p>
+</html>
+</body>
+"""
+email.HTMLBody = email_body
+email_recipients = ['banele.madikane@angloamerican.com', 'breno.andrade@angloamerican.com']
+email.To = '; '.join(email_recipients)
 
 
+# Attach the log file
+attachment = os.path.abspath(log_file_path)
+email.Attachments.Add(attachment)
+email.Send()
