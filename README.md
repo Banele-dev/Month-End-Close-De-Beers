@@ -3,7 +3,7 @@
 Project Title:
 Month-End-Close-De-Beers
 
-Description:
+# Description:
 The purpose of the process is to close month end on SAP for De Beers SA. Currently the process is carried out manually where the user copies data from an Excel "closure" template to SAP. For De Beers SA alone this is over 550 lines of data which cannot be copied over to SAP at once. The data can also not be uploaded to SAP. This, coupled with the fact that this process usually occurs at night (when all transactions have been processed) opens room for errors to occur. A further impact is that while the team is working on capturing this data on SAP, other people cannot access the company codes causing further delays in other areas. The process of closing the month end for De Beers SA is very manual and therefore time-consuming and prone to errors.
 
 This process was automated, which enhanced accuracy, controls, and saved time.
