@@ -8,12 +8,12 @@ The purpose of the process is to close month end on SAP for De Beers SA. Current
 
 This process was automated, which enhanced accuracy, controls, and saved time.
 
-Prerequisites and Dependencies:
+# Prerequisites and Dependencies:
 To proceed with the task, we will need the following files:
 1. Annual Calendar
 2. Valid Company Codes
 
-Code Explanation:
+# Code Explanation:
 The script is for automating some tasks related to SAP GUI interaction, specifically for the "Month-End Close De Beers" application. Here's a breakdown of what the code does:
 1. It starts by checking if the script version matches the expected version maintained by the Automation Team. If it doesn't match, it prompts the user to contact the team and then exits the script.
 2. It prompts the user to select a file containing company codes.
