@@ -24,3 +24,12 @@ The script is for automating some tasks related to SAP GUI interaction, specific
 7. Within these functions, there's a loop that interacts with SAP GUI elements to extract data and populate the DataFrame.
 8. Finally, it writes the DataFrame to an Excel file.
 Overall, the script automates the process of fetching data from SAP GUI tables based on certain criteria and writes the results to an Excel file.
+
+# Outcome Acheived:
+1. This automation reduces the likelihood of human errors that can occur during manual month end close.
+2. By automating the process, the time taken to complete the month-end close is significantly reduced, allowing for quicker access to financial data and reports.
+3. Since the process has been automated, there is less room for errors compared to manual month end close.
+4. This automation frees up resources that can be allocated to other critical tasks, improving overall productivity.
+5. By automating the process, data can now be accessed in real-time, providing timely insights for decision-making.
+6. This automation helps in standardizing the month-end close process, ensuring consistency across different periods.
+7. This automation provides a clear audit trail of the month-end close process, which is beneficial for compliance and auditing purposes.
